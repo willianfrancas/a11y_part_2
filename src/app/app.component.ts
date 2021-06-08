@@ -16,9 +16,9 @@ export class AppComponent {
   constructor(private modalService: ModalService) {}
 
   showModal() {
-    this.modalService.open({
+    this.modalRef = this.modalService.open({
       templateRef: this.modalTemplateRef,
-      title: ''
+      title: 'User Details'
     });
   }
 }
