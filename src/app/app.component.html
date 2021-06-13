@@ -6,22 +6,41 @@
 
 <ng-template #modal>
 
-  <div class="form-field">
-    <label for="firstName">First Name</label>
-    <input id="firstName" type="text" [(value)]="firstName">
-  </div>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-field">
+      <label for="firstName">First Name</label>
+      <input id="firstName" type="text" formControlName="firstName"
+      [attr.aria-invalid]="form.get('firstName').invalid"
+      aria-describedby="firstNameError">
+      <span id="firstNameError" class="validation-error" *ngIf="form.get('firstName')?.errors?.required">first name is required!</span>
+    </div>
 
-  <div class="form-field">
-    <label for="surname">Surname</label>
-    <input id="surname" type="text">
-  </div>
+    <div class="form-field">
+      <label for="surname">Surname</label>
+      <input id="surname" type="text" formControlName="surname"
+      [attr.aria-invalid]="form.get('surname').invalid"
+      aria-describedby="surnameError">
+      <span id="surnameError" class="validation-error" *ngIf="form.get('surname')?.errors?.required">surname is required!</span>
+    </div>
 
-  <div class="form-field">
-    <label for="age">Age</label>
-    <input id="age" type="text">
-  </div>
+    <div class="form-field">
+      <label for="age">Age</label>
+      <input id="age" type="text" formControlName="age"
+      [attr.aria-invalid]="form.get('age').invalid"
+      aria-describedby="surameError">
+      <span id="ageError" class="validation-error" *ngIf="form.get('age')?.errors?.required">age is required!</span>
+    </div>
 
-  <button class="button button-primary" type="button">Submit</button>
-  <button class="button button-secondary" type="button" (click)="modalRef.close()">Cancel</button>
+    <div class="subscribe-group">
+      <label for="info">subscribe to news letter</label>
+      <input id="info" type="checkbox" (change)="subscribeNews = !subscribeNews" formControlName="info">
+      <p *ngIf="subscribeNews">This is a placeholder for more info.</p>
+    </div>
+
+    <div class="button-group">
+      <button class="button button-primary" [attr.aria-disabled]="form.invalid">Submit</button>
+      <button class="button button-dark" type="button" (click)="modalRef.close()">Cancel</button>
+    </div>
+  </form>
 
 </ng-template>

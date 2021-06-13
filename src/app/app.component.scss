@@ -1,0 +1,5 @@
+.button {
+  &[aria-disabled='true'] {
+    background: #99f;
+  }
+}
